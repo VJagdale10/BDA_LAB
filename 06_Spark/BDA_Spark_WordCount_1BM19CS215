@@ -1,0 +1,24 @@
+scala> val data=sc.textFile("/home/bmsce/Desktop/sparkdata_215.txt")
+data: org.apache.spark.rdd.RDD[String] = /home/bmsce/Desktop/sparkdata_215.txt MapPartitionsRDD[1] at textFile at <console>:24
+
+scala> data.collect;
+res0: Array[String] = Array(Hello. How are you. My name is Vidhi)
+
+scala> val splitdata=data.flatMap(line=>line.split(" "));
+splitdata: org.apache.spark.rdd.RDD[String] = MapPartitionsRDD[2] at flatMap at <console>:25
+
+scala> splitdata.collect
+res1: Array[String] = Array(Hello., How, are, you., My, name, is, Vidhi)
+
+scala> val mapdata = splitdata.map(word=>(word,1));
+mapdata: org.apache.spark.rdd.RDD[(String, Int)] = MapPartitionsRDD[3] at map at <console>:25
+
+scala> mapdata.collect;
+res2: Array[(String, Int)] = Array((Hello.,1), (How,1), (are,1), (you.,1), (My,1), (name,1), (is,1), (Vidhi,1))
+
+scala> val reducedata=mapdata.reduceByKey(_+_);
+reducedata: org.apache.spark.rdd.RDD[(String, Int)] = ShuffledRDD[4] at reduceByKey at <console>:25
+
+scala> reducedata.collect;
+res3: Array[(String, Int)] = Array((are,1), (is,1), (How,1), (Hello.,1), (My,1), (Vidhi,1), (name,1), (you.,1))
+

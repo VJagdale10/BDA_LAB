@@ -1,0 +1,144 @@
+hduser@bmsce-Precision-T1700:~$ start-all.sh
+This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh
+Starting namenodes on [localhost]
+hduser@localhost's password: 
+bmschduser@localhost's password: localhost: Permission denied, please try again.
+
+localhost: Permission denied, please try again.
+hduser@localhost's password: 
+localhost: starting namenode, logging to /usr/local/hadoop/logs/hadoop-hduser-namenode-bmsce-Precision-T1700.out
+hduser@localhost's password: 
+localhost: starting datanode, logging to /usr/local/hadoop/logs/hadoop-hduser-datanode-bmsce-Precision-T1700.out
+Starting secondary namenodes [0.0.0.0]
+hduser@0.0.0.0's password: 
+0.0.0.0: starting secondarynamenode, logging to /usr/local/hadoop/logs/hadoop-hduser-secondarynamenode-bmsce-Precision-T1700.out
+starting yarn daemons
+starting resourcemanager, logging to /usr/local/hadoop/logs/yarn-hduser-resourcemanager-bmsce-Precision-T1700.out
+hduser@localhost's password: 
+localhost: starting nodemanager, logging to /usr/local/hadoop/logs/yarn-hduser-nodemanager-bmsce-Precision-T1700.out
+hduser@bmsce-Precision-T1700:~$ jps
+4193 ResourceManager
+3138 DataNode
+3912 SecondaryNameNode
+2968 NameNode
+4649 Jps
+4527 NodeManager
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -mkdir /215new
+
+
+hduser@bmsce-Precision-T1700:~$ hadoop fs -ls /
+Found 14 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 10:15 /1BM19CS167
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 10:03 /1bm19cs167
+drwxr-xr-x   - hduser supergroup          0 2022-06-04 09:28 /214new
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 09:58 /abcde
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 10:04 /abcdef
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 15:37 /bda
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 15:14 /bda1
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 15:08 /laxman
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 15:14 /seetha
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:20 /shivani
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:43 /shivanig
+drwxrwxr-x   - hduser supergroup          0 2019-08-01 16:19 /tmp
+drwxr-xr-x   - hduser supergroup          0 2019-08-01 16:03 /user
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 15:24 /xyz
+
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -put /home/hduser/Desktop/215 /215new/WC.txt
+hduser@bmsce-Precision-T1700:~$ hadoop fs -ls /
+Found 14 items
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 10:15 /1BM19CS167
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 10:03 /1bm19cs167
+drwxr-xr-x   - hduser supergroup          0 2022-06-04 09:35 /214new
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 09:58 /abcde
+drwxr-xr-x   - hduser supergroup          0 2022-05-31 10:04 /abcdef
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 15:37 /bda
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 15:14 /bda1
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 15:08 /laxman
+drwxr-xr-x   - hduser supergroup          0 2022-06-01 15:14 /seetha
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:20 /shivani
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 12:43 /shivanig
+drwxrwxr-x   - hduser supergroup          0 2019-08-01 16:19 /tmp
+drwxr-xr-x   - hduser supergroup          0 2019-08-01 16:03 /user
+drwxr-xr-x   - hduser supergroup          0 2022-06-03 15:24 /xyz
+
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /215new/WC.txt
+My name is Trisha Lakhani.
+
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -copyFromLocal  /home/hduser/Desktop/215 /215new/WC1.txt
+
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /215new/WC1.txt
+My name is Trisha Lakhani.
+
+
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -get /215new/WC.txt /home/hduser/Downloads/WWC.txt
+
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -getmerge /214new/WC.txt /215new/WC1.txt /home/hduser/Desktop/Merge.txt
+
+
+hduser@bmsce-Precision-T1700:~$ sudo nano ramya.txt
+[sudo] password for hduser: 
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /215new/ramya.txt
+cat: `/214new/ramya.txt': No such file or directory
+hduser@bmsce-Precision-T1700:~$ hadoop fs -ls /215new
+Found 2 items
+-rw-r--r--   1 hduser supergroup         27 2022-06-04 09:35 /215new/WC.txt
+-rw-r--r--   1 hduser supergroup         27 2022-06-04 09:39 /215new/WC1.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -put /home/hduser/ramya.txt  /215new/WC2.txt
+hduser@bmsce-Precision-T1700:~$ hadoop fs -ls /214new
+Found 3 items
+-rw-r--r--   1 hduser supergroup         27 2022-06-04 09:35 /215new/WC.txt
+-rw-r--r--   1 hduser supergroup         27 2022-06-04 09:39 /215new/WC1.txt
+-rw-r--r--   1 hduser supergroup         18 2022-06-04 09:55 /215new/WC2.txt
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /214new/WC2.txt
+my name is ramya
+
+
+hduser@bmsce-Precision-T1700:~$ hadoop fs -getfacl /215new/
+# file: /214new
+# owner: hduser
+# group: supergroup
+user::rwx
+group::r-x
+other::r-x
+
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -copyToLocal /215new/WC.txt /home/hduser/Desktop
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /215new/WC.txt
+My name is Trisha Lakhani.
+
+
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -mv /215new /FFF
+hduser@bmsce-Precision-T1700:~$ hadoop fs -ls /FFF
+Found 3 items
+-rw-r--r--   1 hduser supergroup         27 2022-06-04 09:35 /FFF/WC.txt
+-rw-r--r--   1 hduser supergroup         27 2022-06-04 09:39 /FFF/WC1.txt
+-rw-r--r--   1 hduser supergroup         18 2022-06-04 09:55 /FFF/WC2.txt
+
+
+hduser@bmsce-Precision-T1700:~$ sudo nano file.txt
+[sudo] password for hduser: 
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -put /home/hduser/file.txt /FFF/file.txt
+hduser@bmsce-Precision-T1700:~$ hadoop fs -ls /FFF
+
+Found 4 items
+-rw-r--r--   1 hduser supergroup         27 2022-06-04 09:35 /FFF/WC.txt
+-rw-r--r--   1 hduser supergroup         27 2022-06-04 09:39 /FFF/WC1.txt
+-rw-r--r--   1 hduser supergroup         18 2022-06-04 09:55 /FFF/WC2.txt
+-rw-r--r--   1 hduser supergroup         22 2022-06-04 10:10 /FFF/file.txt
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cat /FFF/file.txt
+my usn is 1bm19cs215
+
+
+
+hduser@bmsce-Precision-T1700:~$ hdfs dfs -cp /FFF/file.txt /215new
+

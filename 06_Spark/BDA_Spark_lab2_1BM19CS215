@@ -1,0 +1,27 @@
+scala> val textFile=sc.textFile("/home/bmsce/Desktop/sparkdata_215.txt")
+textFile: org.apache.spark.rdd.RDD[String] = /home/bmsce/Desktop/sparkdata_215.txt MapPartitionsRDD[23] at textFile at <console>:31
+
+
+scala> val counts = textFile.flatMap(line => line.split(" ")).map(word =>(word,1)).reduceByKey(_+_)
+counts: org.apache.spark.rdd.RDD[(String, Int)] = ShuffledRDD[29] at reduceByKey at <console>:32
+
+scala> import scala.collection.immutable.ListMap
+import scala.collection.immutable.ListMap
+
+scala> val sorted = ListMap(counts.collect.sortWith(_._2 > _._2):_*)
+sorted: scala.collection.immutable.ListMap[String,Int] = Map(Hello -> 7, vidhi -> 3)
+
+scala> println(sorted)
+Map(Hello -> 7, vidhi -> 3)
+
+scala> for((k,v)<-sorted)
+     | {
+     | if(v>4)
+     | {
+     | print(k+",")
+     | print(v)
+     | println()
+     | }
+     | }
+Hello,7
+
